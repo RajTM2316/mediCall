@@ -1,0 +1,11 @@
+package com.raj.medicall.repository;
+
+import com.raj.medicall.entity.Prescription;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface PrescriptionRepository extends JpaRepository<Prescription,Long> {
+    List<Prescription> findByPatientPatientId(Long patientId);
+    List<Prescription> findByDoctorUserId(Long doctorId);
+}
