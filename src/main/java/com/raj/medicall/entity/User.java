@@ -2,9 +2,10 @@ package com.raj.medicall.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import tools.jackson.databind.ser.jdk.JDKKeySerializers;
 
 @Entity
-@Table(name="users")
+@Table(name = "app_user")
 @NoArgsConstructor
 @ToString
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -28,10 +29,16 @@ public class User {
     private String phoneNo;
 
     @Setter
+    @Getter
     private String password;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @Getter
+    @Setter
+    @Column
+    private boolean isActive=true;
 
 }

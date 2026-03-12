@@ -16,5 +16,6 @@ public class Role {
 
     @Getter
     @Setter
+    @Column(unique = true,nullable = false)
     private String name;
 }

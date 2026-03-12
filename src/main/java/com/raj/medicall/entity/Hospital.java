@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "doctors")
+@Table(name = "hospitals")
 public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
