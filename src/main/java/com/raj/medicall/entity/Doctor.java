@@ -10,7 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
+@PrimaryKeyJoinColumn(name = "id")
 public class Doctor extends User{
     private String qualification;
 
@@ -31,8 +32,8 @@ public class Doctor extends User{
     @ManyToMany
     @JoinTable(
             name = "doctor_patient",
-            joinColumns =@JoinColumn(name = "doctor_id"),
-            inverseJoinColumns=@JoinColumn(name="patient_id")
+            joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "patient_id", referencedColumnName = "id")
     )
     private List<Patient> patients;
 

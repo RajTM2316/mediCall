@@ -16,9 +16,13 @@ public class Hospital {
 
     @Getter
     @Setter
+    @Column(nullable = false)
     private String hospitalName;
 
     @Lob
+    @Getter
+    @Setter
+    @Column(columnDefinition = "TEXT")
     private String hospitalAddress;
 
 }
