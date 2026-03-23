@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/auth/register/doctors").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test/auth").permitAll()
                 // Role-based endpoints
+                .requestMatchers(HttpMethod.POST, "/auth/register/hospitals").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/test/patient").hasRole("PATIENT")
                 .requestMatchers(HttpMethod.GET, "/test/doctor").hasRole("DOCTOR")
                 .requestMatchers(HttpMethod.GET, "/test/admin").hasRole("ADMIN")

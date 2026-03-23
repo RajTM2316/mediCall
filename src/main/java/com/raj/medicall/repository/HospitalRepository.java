@@ -1,7 +1,11 @@
 package com.raj.medicall.repository;
 
+import com.raj.medicall.entity.Hospital;
 import com.raj.medicall.entity.Patient;
+import com.raj.medicall.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HospitalRepository extends JpaRepository<Patient,Long> {
+import java.util.Optional;
+
+public interface HospitalRepository extends JpaRepository<Hospital,Long> {
 }
