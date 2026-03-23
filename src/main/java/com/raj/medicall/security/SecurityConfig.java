@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/test/patient").hasRole("PATIENT")
                 .requestMatchers(HttpMethod.GET, "/test/doctor").hasRole("DOCTOR")
                 .requestMatchers(HttpMethod.GET, "/test/admin").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/patient/profile").hasRole("PATIENT")
                 // Any other request authenticated by default
                 .anyRequest().authenticated()
         );

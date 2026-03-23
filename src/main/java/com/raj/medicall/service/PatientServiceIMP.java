@@ -1,6 +1,7 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PatientRegisterRequest;
+import com.raj.medicall.dto.UpdatePatientProfile;
 import com.raj.medicall.entity.Patient;
 import com.raj.medicall.entity.Role;
 import com.raj.medicall.repository.PatientRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class PatientServiceIMP implements PatientService {
@@ -48,6 +50,28 @@ public class PatientServiceIMP implements PatientService {
 
         response.put("status", "success");
         response.put("message", "Patient Registered Successfully!!!");
+        return response;
+    }
+
+    @Override
+    public Map<String, String> updateProfile(UpdatePatientProfile request) {
+        Map<String,String> response = new HashMap<>();
+        Optional<Patient> optionalPatient = patientRepository.findById(request.getPatientId());
+        if (optionalPatient.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "Patient not found");
+            return response;
+        }
+        Patient patient = optionalPatient.get();
+        patient.setAge(request.getAge());
+        patient.setGender(request.getGender());
+        patient.setEmergencyContact(request.getEmergencyContact());
+        patient.setBloodGroup(request.getBloodGroup());
+        patient.setHeight(request.getHeight());
+        patient.setWeight(request.getWeight());
+        patientRepository.save(patient);
+        response.put("status", "success");
+        response.put("message", "Profile updated successfully");
         return response;
     }
 }
