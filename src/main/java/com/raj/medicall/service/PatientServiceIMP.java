@@ -12,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class PatientServiceIMP implements PatientService {
     @Autowired
@@ -24,12 +27,12 @@ public class PatientServiceIMP implements PatientService {
     private UserRepository userRepository;
 
     @Override
-    public String registerPatient(PatientRegisterRequest request) {
+    public Map<String, String> registerPatient(PatientRegisterRequest request) {
+        Map<String, String> response = new HashMap<>();
         if(userRepository.existsByEmail(request.getEmail())){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Email already exists"
-            );
+            response.put("status", "fail");
+            response.put("message", "Email already exists");
+            return response;
         }
         Role role = roleRepository
                 .findByName("ROLE_PATIENT")
@@ -42,6 +45,9 @@ public class PatientServiceIMP implements PatientService {
         patient.setPhoneNo(request.getPhoneNo());
         patient.setRole(role);
         patientRepository.save(patient);
-        return "Patient Registered Successfully!!!";
+
+        response.put("status", "success");
+        response.put("message", "Patient Registered Successfully!!!");
+        return response;
     }
 }

@@ -17,22 +17,19 @@ import javax.sql.DataSource;
 public class SecurityConfig {
 
     // JDBC Authentication
-
     @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
-
-        JdbcUserDetailsManager jdbcUserDetailsManager =
-                new JdbcUserDetailsManager(dataSource);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         // query to fetch user
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "select email, password, is_active from app_user where email=?"
+                "select email, password, is_active as enabled from app_user where email=?"
         );
 
         // query to fetch roles
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
                 "select u.email, r.name " +
-                        "from app_user u join roles r on u.role_id=r.id " +
+                        "from app_user u join roles r on u.role_id = r.id " +
                         "where u.email=?"
         );
 
@@ -40,30 +37,27 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-
-        http.authorizeHttpRequests(configurer ->
-                configurer
-
-                        .requestMatchers("/auth/**").permitAll()
-
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-
-                        .requestMatchers("/doctor/**").hasRole("DOCTOR")
-
-                        .requestMatchers("/patient/**").hasRole("PATIENT")
-
-                        .anyRequest().authenticated()
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth -> auth
+                // Public endpoints first
+                .requestMatchers(HttpMethod.POST, "/auth/register/patients").permitAll()
+                .requestMatchers(HttpMethod.GET, "/test/auth").permitAll()
+                // Role-based endpoints
+                .requestMatchers(HttpMethod.GET, "/test/patient").hasRole("PATIENT")
+                .requestMatchers(HttpMethod.GET, "/test/doctor").hasRole("DOCTOR")
+                .requestMatchers(HttpMethod.GET, "/test/admin").hasRole("ADMIN")
+                // Any other request authenticated by default
+                .anyRequest().authenticated()
         );
 
-        // Basic Auth (same as example)
         http.httpBasic(Customizer.withDefaults());
 
-        // disable csrf for REST
+        // Disable CSRF for REST APIs
         http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -2,6 +2,8 @@ package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PatientRegisterRequest;
 
+import java.util.Map;
+
 public interface PatientService {
-    String registerPatient(PatientRegisterRequest request);
+    Map<String,String> registerPatient(PatientRegisterRequest request);
 }

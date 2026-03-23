@@ -5,19 +5,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-    @GetMapping("/admin/test")
+    @GetMapping("/test/admin")
     public String adminAccess(){
         return "Admin Access granted";
     }
-    @GetMapping("/doctor/test")
+    @GetMapping("/test/doctor")
     public String doctorAccess(){
         return "Doctor Access granted";
     }
-    @GetMapping("/patient/test")
+    @GetMapping("/test/patient")
     public String patientAccess(){
         return "Patient Access granted";
     }
-    @GetMapping("/auth/test")
+    @GetMapping("test/auth")
     public String publicAccess(){
         return "Public endpoint working";
     }
