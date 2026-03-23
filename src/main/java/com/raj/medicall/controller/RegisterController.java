@@ -1,8 +1,10 @@
 package com.raj.medicall.controller;
 
 import com.raj.medicall.dto.AdminRegisterRequest;
+import com.raj.medicall.dto.DoctorRegisterRequest;
 import com.raj.medicall.dto.PatientRegisterRequest;
 import com.raj.medicall.service.AdminService;
+import com.raj.medicall.service.DoctorService;
 import com.raj.medicall.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,9 @@ public class RegisterController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private DoctorService doctorService;
+
     @PostMapping("/register/patients")
     public Map<String, String> registerPatient(@RequestBody PatientRegisterRequest request){
         return patientService.registerPatient(request);
@@ -31,4 +36,10 @@ public class RegisterController {
     public Map<String, String> registerAdmin(@RequestBody AdminRegisterRequest request){
         return adminService.registerAdmin(request);
     }
+
+    @PostMapping("/register/doctors")
+    public Map<String,String> registerDoctor(@RequestBody DoctorRegisterRequest request){
+        return doctorService.registerDoctor(request);
+    }
+
 }
