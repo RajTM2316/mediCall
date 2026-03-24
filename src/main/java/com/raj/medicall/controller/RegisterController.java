@@ -1,14 +1,11 @@
 package com.raj.medicall.controller;
 
-import com.raj.medicall.dto.AdminRegisterRequest;
-import com.raj.medicall.dto.DoctorRegisterRequest;
-import com.raj.medicall.dto.HospitalRegisterRequest;
-import com.raj.medicall.dto.PatientRegisterRequest;
-import com.raj.medicall.service.AdminService;
-import com.raj.medicall.service.DoctorService;
-import com.raj.medicall.service.HospitalService;
-import com.raj.medicall.service.PatientService;
+import com.raj.medicall.dto.*;
+import com.raj.medicall.entity.Medicine;
+import com.raj.medicall.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +29,9 @@ public class RegisterController {
     @Autowired
     private HospitalService hospitalService;
 
+    @Autowired
+    private MedicineService medicineService;
+
     @PostMapping("/register/patients")
     public Map<String, String> registerPatient(@RequestBody PatientRegisterRequest request){
         return patientService.registerPatient(request);
@@ -51,4 +51,10 @@ public class RegisterController {
     public Map<String,String> registerDoctor(@RequestBody HospitalRegisterRequest request){
         return hospitalService.registerHospital(request);
     }
+
+    @PostMapping("/register/medicines")
+    public ResponseEntity<Medicine> registerMedicine(@RequestBody AddMedicineRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(medicineService.registerMedicine(request));
+    }
+
 }
