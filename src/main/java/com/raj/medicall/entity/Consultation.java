@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table
 @NoArgsConstructor
-@ToString(exclude = "prescriptions")
+@ToString(exclude = {"patient","doctor","prescriptions"})
 @AllArgsConstructor
 public class Consultation {
     @Getter

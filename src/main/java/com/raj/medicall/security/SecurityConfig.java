@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/auth/register/patients").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/admins").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/doctors").permitAll()
+                .requestMatchers(HttpMethod.POST, "/consult").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test/auth").permitAll()
                 // Role-based endpoints
                 .requestMatchers(HttpMethod.POST, "/auth/register/hospitals").hasRole("ADMIN")
@@ -52,6 +53,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/test/admin").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/patient/profile").hasRole("PATIENT")
                 .requestMatchers(HttpMethod.PUT, "/doctor/profile").hasRole("DOCTOR")
+                .requestMatchers(HttpMethod.GET, "/consult/patient/**").hasRole("PATIENT")
+                .requestMatchers(HttpMethod.GET, "/consult/doctor/**").hasRole("DOCTOR")
+                .requestMatchers(HttpMethod.GET, "/consult/**").hasAnyRole("DOCTOR","PATIENT")
+                .requestMatchers(HttpMethod.DELETE, "/consult/**").hasRole("DOCTOR")
                 // Any other request authenticated by default
                 .anyRequest().authenticated()
         );
