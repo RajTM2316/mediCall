@@ -3,6 +3,7 @@ package com.raj.medicall.service;
 import com.raj.medicall.dto.AddMedicineRequest;
 import com.raj.medicall.entity.Medicine;
 import com.raj.medicall.repository.MedicineRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class MedicineServiceIMP implements MedicineService{
     private MedicineRepository medicineRepository;
 
     @Override
+    @Transactional
     public Medicine registerMedicine(AddMedicineRequest request) {
         Medicine medicine = new Medicine();
         medicine.setName(request.getName());

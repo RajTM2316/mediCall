@@ -6,6 +6,7 @@ import com.raj.medicall.entity.Medicine;
 import com.raj.medicall.entity.Prescription;
 import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class PrescriptionServiceIMP implements PrescriptionService{
     private PrescriptionRepository prescriptionRepository;
 
     @Override
+    @Transactional
     public Prescription createPrescription(PrescriptionRequest request) {
         Consultation consultation = consultationRepository.findById(request.getConsultationId())
                 .orElseThrow(()-> new ResourceNotFoundException("Consultation not found"));

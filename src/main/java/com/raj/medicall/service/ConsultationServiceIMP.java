@@ -8,6 +8,7 @@ import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.ConsultationRepository;
 import com.raj.medicall.repository.DoctorRepository;
 import com.raj.medicall.repository.PatientRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class ConsultationServiceIMP implements ConsultationService {
     private ConsultationRepository consultationRepository;
 
     @Override
+    @Transactional
     public Map<String,String> createConsultation(ConsultationRequest request) {
         Map<String,String> response = new HashMap<>();
         Long PatientId = request.getPatientId();
@@ -43,6 +45,7 @@ public class ConsultationServiceIMP implements ConsultationService {
         consultation.setDiagnosis(request.getDiagnosis());
         consultation.setVisitTime(request.getVisitTime());
         consultation.setVisitDate(request.getVisitDate());
+        consultationRepository.save(consultation);
         response.put("status","Success");
         response.put("message","Consultation Created Successfully !!!");
         return response;
@@ -61,6 +64,7 @@ public class ConsultationServiceIMP implements ConsultationService {
                 .orElseThrow(() -> new RuntimeException("Consultation not found"));
     }
 
+    @Transactional
     public void delete(Long id) {
         consultationRepository.deleteById(id);
     }

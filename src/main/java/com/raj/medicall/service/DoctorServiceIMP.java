@@ -9,6 +9,7 @@ import com.raj.medicall.repository.DoctorRepository;
 import com.raj.medicall.repository.HospitalRepository;
 import com.raj.medicall.repository.RoleRepository;
 import com.raj.medicall.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class DoctorServiceIMP implements DoctorService{
     private HospitalRepository hospitalRepository;
 
     @Override
+    @Transactional
     public Map<String, String> registerDoctor(DoctorRegisterRequest request) {
         Map<String,String> response = new HashMap<>();
         if(userRepository.existsByEmail(request.getEmail())){
@@ -55,6 +57,7 @@ public class DoctorServiceIMP implements DoctorService{
     }
 
     @Override
+    @Transactional
     public Map<String, String> updateDoctorProfile(UpdateDoctorProfile request) {
         Map<String,String> response=new HashMap<>();
         Optional<Doctor> optionalDoctor = doctorRepository.findById(request.getDoctorId());

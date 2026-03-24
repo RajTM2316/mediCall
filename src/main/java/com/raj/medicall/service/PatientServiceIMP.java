@@ -4,9 +4,11 @@ import com.raj.medicall.dto.PatientRegisterRequest;
 import com.raj.medicall.dto.UpdatePatientProfile;
 import com.raj.medicall.entity.Patient;
 import com.raj.medicall.entity.Role;
+import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.PatientRepository;
 import com.raj.medicall.repository.RoleRepository;
 import com.raj.medicall.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +31,7 @@ public class PatientServiceIMP implements PatientService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public Map<String, String> registerPatient(PatientRegisterRequest request) {
         Map<String, String> response = new HashMap<>();
         if(userRepository.existsByEmail(request.getEmail())){
@@ -38,7 +41,7 @@ public class PatientServiceIMP implements PatientService {
         }
         Role role = roleRepository
                 .findByName("ROLE_PATIENT")
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
 
         Patient patient = new Patient();
         patient.setName(request.getName());
@@ -54,6 +57,7 @@ public class PatientServiceIMP implements PatientService {
     }
 
     @Override
+    @Transactional
     public Map<String, String> updateProfile(UpdatePatientProfile request) {
         Map<String,String> response = new HashMap<>();
         Optional<Patient> optionalPatient = patientRepository.findById(request.getPatientId());
