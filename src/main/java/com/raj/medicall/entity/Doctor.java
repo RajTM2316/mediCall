@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
+@ToString(callSuper = true , exclude = "consultations")
 @PrimaryKeyJoinColumn(name = "id")
 public class Doctor extends User{
     private String qualification;
@@ -29,12 +29,7 @@ public class Doctor extends User{
     @JoinColumn(name="hospital_id")
     private Hospital hospital;
 
-    @ManyToMany
-    @JoinTable(
-            name = "doctor_patient",
-            joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    )
-    private List<Patient> patients;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Consultation> consultations;
 
 }

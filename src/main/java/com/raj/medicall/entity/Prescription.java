@@ -1,10 +1,8 @@
 package com.raj.medicall.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,24 +10,18 @@ import java.time.LocalTime;
 @Entity
 @Table
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "consultation")
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long prescriptionId;
 
+    @ManyToOne
+    @JoinColumn(name = "consultation_id")
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    @Getter
-    @Setter
-    private Patient patient;
+    private Consultation consultation;
 
     @Getter
     @Setter
