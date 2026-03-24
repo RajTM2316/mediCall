@@ -21,15 +21,6 @@ public class ConsultationController {
     public Map<String,String> createConsultation(@RequestBody ConsultationRequest request){
         return consultationService.createConsultation(request);
     }
-    @GetMapping("/patient/{id}")
-    public List<Consultation> getByPatient(@PathVariable("id") Long patientId) {
-        return consultationService.getByPatient(patientId);
-    }
-
-    @GetMapping("/doctor/{id}")
-    public List<Consultation> getByDoctor(@PathVariable("id") Long doctorId) {
-        return consultationService.getByDoctor(doctorId);
-    }
     @GetMapping("/{id}")
     public Consultation getById(@PathVariable Long id) {
         return consultationService.getById(id);
@@ -38,5 +29,14 @@ public class ConsultationController {
     public String delete(@PathVariable Long id) {
         consultationService.delete(id);
         return "Consultation deleted successfully";
+    }
+    @GetMapping("/patient/{id}")
+    public ResponseEntity<List<Consultation>> getByPatient(@PathVariable Long id){
+        return ResponseEntity.ok(consultationService.getConsultationForPatient(id));
+    }
+
+    @GetMapping("/doctor/{id}")
+    public ResponseEntity<List<Consultation>> getByDoctor(@PathVariable Long id){
+        return ResponseEntity.ok(consultationService.getConsultationForDoctor(id));
     }
 }

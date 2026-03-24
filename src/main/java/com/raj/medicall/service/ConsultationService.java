@@ -11,8 +11,8 @@ import java.util.Map;
 
 public interface ConsultationService {
     Map<String,String> createConsultation(ConsultationRequest request);
-    public List<Consultation> getByPatient(Long patientId);
-    public List<Consultation> getByDoctor(Long doctorId);
     public Consultation getById(Long id);
     public void delete(Long id);
+    public List<Consultation> getConsultationForPatient(Long id);
+    public List<Consultation> getConsultationForDoctor(Long id);
 }

@@ -51,14 +51,6 @@ public class ConsultationServiceIMP implements ConsultationService {
         return response;
 
     }
-    public List<Consultation> getByPatient(Long patientId) {
-        return consultationRepository.findByPatient_Id(patientId);
-    }
-
-    public List<Consultation> getByDoctor(Long doctorId) {
-        return consultationRepository.findByDoctor_Id(doctorId);
-    }
-
     public Consultation getById(Long id) {
         return consultationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Consultation not found"));
@@ -68,4 +60,17 @@ public class ConsultationServiceIMP implements ConsultationService {
     public void delete(Long id) {
         consultationRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public List<Consultation> getConsultationForPatient(Long id) {
+        return consultationRepository.findByPatient_Id(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Consultation> getConsultationForDoctor(Long id) {
+        return consultationRepository.findByDoctor_Id(id);
+    }
+
 }
