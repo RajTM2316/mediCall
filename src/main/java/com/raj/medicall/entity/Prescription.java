@@ -2,7 +2,6 @@ package com.raj.medicall.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,7 +17,7 @@ public class Prescription {
     private Long prescriptionId;
 
     @ManyToOne
-    @JoinColumn(name = "consultation_id")
+    @JoinColumn(name = "consultation_id",nullable = false)
     @Getter
     @Setter
     private Consultation consultation;
@@ -26,7 +25,7 @@ public class Prescription {
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "medicine_id")
+    @JoinColumn(name = "medicine_id",nullable = false)
     private Medicine medicine;
 
     @Getter
