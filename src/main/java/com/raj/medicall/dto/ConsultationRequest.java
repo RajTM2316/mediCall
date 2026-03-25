@@ -7,8 +7,8 @@ import java.time.LocalTime;
 
 @Data
 public class ConsultationRequest {
-    private Long PatientId;
-    private Long DoctorId;
+    private Long patientId;
+    private Long doctorId;
     private String diagnosis;
     private LocalDate visitDate;
     private LocalTime visitTime;

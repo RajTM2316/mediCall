@@ -1,6 +1,7 @@
 package com.raj.medicall.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class Patient extends User{
     private List<String> allergies;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonManagedReference
     private List<Consultation> consultations;
 
     private String emergencyContact;

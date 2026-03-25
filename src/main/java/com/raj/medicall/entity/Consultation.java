@@ -1,5 +1,6 @@
 package com.raj.medicall.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,11 +23,13 @@ public class Consultation {
     @ManyToOne
     @JoinColumn(name = "patient_id")
     @Getter @Setter
+    @JsonBackReference
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name="doctor_id")
     @Getter @Setter
+    @JsonBackReference
     private Doctor doctor;
 
     @Getter @Setter

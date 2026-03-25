@@ -3,6 +3,7 @@ package com.raj.medicall.controller;
 import com.raj.medicall.dto.*;
 import com.raj.medicall.entity.Medicine;
 import com.raj.medicall.service.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,27 +34,27 @@ public class RegisterController {
     private MedicineService medicineService;
 
     @PostMapping("/register/patients")
-    public Map<String, String> registerPatient(@RequestBody PatientRegisterRequest request){
+    public Map<String, String> registerPatient(@Valid @RequestBody PatientRegisterRequest request){
         return patientService.registerPatient(request);
     }
 
     @PostMapping("/register/admins")
-    public Map<String, String> registerAdmin(@RequestBody AdminRegisterRequest request){
+    public Map<String, String> registerAdmin(@Valid @RequestBody AdminRegisterRequest request){
         return adminService.registerAdmin(request);
     }
 
     @PostMapping("/register/doctors")
-    public Map<String,String> registerDoctor(@RequestBody DoctorRegisterRequest request){
+    public Map<String,String> registerDoctor(@Valid @RequestBody DoctorRegisterRequest request){
         return doctorService.registerDoctor(request);
     }
 
     @PostMapping("/register/hospitals")
-    public Map<String,String> registerDoctor(@RequestBody HospitalRegisterRequest request){
+    public Map<String,String> registerDoctor(@Valid @RequestBody HospitalRegisterRequest request){
         return hospitalService.registerHospital(request);
     }
 
     @PostMapping("/register/medicines")
-    public ResponseEntity<Medicine> registerMedicine(@RequestBody AddMedicineRequest request){
+    public ResponseEntity<Medicine> registerMedicine(@Valid @RequestBody AddMedicineRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(medicineService.registerMedicine(request));
     }
 

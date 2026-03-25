@@ -38,7 +38,6 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         prescription.setEndDate(request.getEndDate());
         prescription.setTimeToTake(request.getTimeToTake());
         prescription.setNotes(request.getNotes());
-
         return prescriptionRepository.save(prescription);
     }
 }
