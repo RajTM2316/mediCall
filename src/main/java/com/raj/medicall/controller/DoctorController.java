@@ -5,6 +5,7 @@ import com.raj.medicall.dto.UpdateDoctorProfile;
 import com.raj.medicall.entity.Prescription;
 import com.raj.medicall.service.DoctorService;
 import com.raj.medicall.service.PrescriptionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +20,12 @@ public class DoctorController {
     private PrescriptionService prescriptionService;
 
     @PutMapping("/profile")
-    public Map<String,String> updateProfile(@RequestBody UpdateDoctorProfile updateDoctorProfile){
+    public Map<String,String> updateProfile(@Valid @RequestBody UpdateDoctorProfile updateDoctorProfile){
         return doctorService.updateDoctorProfile(updateDoctorProfile);
     }
 
     @PostMapping("/prescription")
-    public Prescription createPrescription(@RequestBody PrescriptionRequest request) {
+    public Prescription createPrescription(@Valid @RequestBody PrescriptionRequest request) {
         return prescriptionService.createPrescription(request);
     }
 

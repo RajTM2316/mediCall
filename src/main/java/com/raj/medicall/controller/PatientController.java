@@ -2,6 +2,7 @@ package com.raj.medicall.controller;
 
 import com.raj.medicall.dto.UpdatePatientProfile;
 import com.raj.medicall.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class PatientController {
     private PatientService patientService;
 
     @PutMapping("/profile")
-    public Map<String,String> updateProfile(@RequestBody UpdatePatientProfile updatePatientProfile){
+    public Map<String,String> updateProfile(@Valid  @RequestBody UpdatePatientProfile updatePatientProfile){
         return patientService.updateProfile(updatePatientProfile);
     }
 }

@@ -4,6 +4,7 @@ import com.raj.medicall.dto.ConsultationRequest;
 import com.raj.medicall.entity.Consultation;
 import com.raj.medicall.service.ConsultationService;
 import com.raj.medicall.service.ConsultationServiceIMP;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ConsultationController {
     @Autowired
     private ConsultationService consultationService;
     @PostMapping
-    public Map<String,String> createConsultation(@RequestBody ConsultationRequest request){
+    public Map<String,String> createConsultation(@Valid @RequestBody ConsultationRequest request){
         return consultationService.createConsultation(request);
     }
     @GetMapping("/{id}")
