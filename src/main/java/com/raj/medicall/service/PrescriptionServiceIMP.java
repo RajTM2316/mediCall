@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PrescriptionServiceIMP implements PrescriptionService{
     @Autowired
@@ -40,4 +42,18 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         prescription.setNotes(request.getNotes());
         return prescriptionRepository.save(prescription);
     }
+
+    @Override
+    public Prescription getById(Long id) {
+        return prescriptionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Prescription not Found"));
+    }
+
+    @Override
+    public List<Prescription> getAll() {
+        return prescriptionRepository.findAll();
+    }
+
+
+
+
 }
