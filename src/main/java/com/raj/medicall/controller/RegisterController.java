@@ -34,17 +34,17 @@ public class RegisterController {
     private MedicineService medicineService;
 
     @PostMapping("/register/patients")
-    public Map<String, String> registerPatient(@Valid @RequestBody PatientRegisterRequest request){
+    public Map<String, String> registerPatient(@Valid @RequestBody UserRegisterRequest request){
         return patientService.registerPatient(request);
     }
 
     @PostMapping("/register/admins")
-    public Map<String, String> registerAdmin(@Valid @RequestBody AdminRegisterRequest request){
+    public Map<String, String> registerAdmin(@Valid @RequestBody UserRegisterRequest request){
         return adminService.registerAdmin(request);
     }
 
     @PostMapping("/register/doctors")
-    public Map<String,String> registerDoctor(@Valid @RequestBody DoctorRegisterRequest request){
+    public Map<String,String> registerDoctor(@Valid @RequestBody UserRegisterRequest request){
         return doctorService.registerDoctor(request);
     }
 

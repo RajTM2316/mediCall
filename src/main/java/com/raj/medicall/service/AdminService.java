@@ -1,10 +1,9 @@
 package com.raj.medicall.service;
 
-import com.raj.medicall.dto.AdminRegisterRequest;
-import com.raj.medicall.dto.PatientRegisterRequest;
+import com.raj.medicall.dto.UserRegisterRequest;
 
 import java.util.Map;
 
 public interface AdminService {
-    Map<String,String> registerAdmin(AdminRegisterRequest request);
+    Map<String,String> registerAdmin(UserRegisterRequest request);
 }

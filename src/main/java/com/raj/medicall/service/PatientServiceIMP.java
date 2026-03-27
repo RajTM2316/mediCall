@@ -1,7 +1,7 @@
 package com.raj.medicall.service;
 
-import com.raj.medicall.dto.PatientRegisterRequest;
 import com.raj.medicall.dto.UpdatePatientProfile;
+import com.raj.medicall.dto.UserRegisterRequest;
 import com.raj.medicall.entity.Patient;
 import com.raj.medicall.entity.Role;
 import com.raj.medicall.exception.ResourceNotFoundException;
@@ -10,10 +10,8 @@ import com.raj.medicall.repository.RoleRepository;
 import com.raj.medicall.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +30,7 @@ public class PatientServiceIMP implements PatientService {
 
     @Override
     @Transactional
-    public Map<String, String> registerPatient(PatientRegisterRequest request) {
+    public Map<String, String> registerPatient(UserRegisterRequest request) {
         Map<String, String> response = new HashMap<>();
         if(userRepository.existsByEmail(request.getEmail())){
             response.put("status", "fail");

@@ -1,7 +1,7 @@
 package com.raj.medicall.service;
 
-import com.raj.medicall.dto.DoctorRegisterRequest;
 import com.raj.medicall.dto.UpdateDoctorProfile;
+import com.raj.medicall.dto.UserRegisterRequest;
 import com.raj.medicall.entity.Doctor;
 import com.raj.medicall.entity.Hospital;
 import com.raj.medicall.entity.Role;
@@ -33,7 +33,7 @@ public class DoctorServiceIMP implements DoctorService{
 
     @Override
     @Transactional
-    public Map<String, String> registerDoctor(DoctorRegisterRequest request) {
+    public Map<String, String> registerDoctor(UserRegisterRequest request) {
         Map<String,String> response = new HashMap<>();
         if(userRepository.existsByEmail(request.getEmail())){
             response.put("status", "fail");

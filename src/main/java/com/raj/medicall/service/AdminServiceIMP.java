@@ -1,7 +1,6 @@
 package com.raj.medicall.service;
 
-import com.raj.medicall.dto.AdminRegisterRequest;
-import com.raj.medicall.dto.PatientRegisterRequest;
+import com.raj.medicall.dto.UserRegisterRequest;
 import com.raj.medicall.entity.Role;
 import com.raj.medicall.entity.User;
 import com.raj.medicall.exception.ResourceNotFoundException;
@@ -29,7 +28,7 @@ public class AdminServiceIMP implements AdminService{
 
     @Override
     @Transactional
-    public Map<String, String> registerAdmin(AdminRegisterRequest request) {
+    public Map<String, String> registerAdmin(UserRegisterRequest request) {
         Map<String, String> response = new HashMap<>();
 
         if (userRepository.existsByEmail(request.getEmail())) {

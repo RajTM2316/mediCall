@@ -1,7 +1,6 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.HospitalRegisterRequest;
-import com.raj.medicall.dto.PatientRegisterRequest;
 
 import java.util.Map;
 
