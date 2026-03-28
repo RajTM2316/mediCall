@@ -1,5 +1,6 @@
 package com.raj.medicall.controller;
 
+import com.raj.medicall.dto.ReschedulePrescriptionRequest;
 import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Prescription;
 import com.raj.medicall.service.PrescriptionService;
@@ -43,4 +44,9 @@ public class PrescriptionController {
     public ResponseEntity<Prescription> updatePrescription(@Valid @RequestBody UpdatePrescription updated, @PathVariable Long id){
         return ResponseEntity.ok(prescriptionService.updatePrescription(updated,id));
     }
+    @PutMapping("/upd/reschedule/{id}")
+    public ResponseEntity<Prescription> reschedulePrescription(@Valid @RequestBody ReschedulePrescriptionRequest updated, @PathVariable Long id){
+        return ResponseEntity.ok(prescriptionService.rescheduledPrescription(updated,id));
+    }
+
 }

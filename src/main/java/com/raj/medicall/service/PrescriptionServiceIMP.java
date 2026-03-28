@@ -1,6 +1,7 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PrescriptionRequest;
+import com.raj.medicall.dto.ReschedulePrescriptionRequest;
 import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Consultation;
 import com.raj.medicall.entity.Medicine;
@@ -86,5 +87,17 @@ public class PrescriptionServiceIMP implements PrescriptionService{
 
         prescriptionRepository.save(prescription);
         return prescription;
+    }
+
+    @Override
+    public Prescription rescheduledPrescription(ReschedulePrescriptionRequest updated, Long id) {
+        Prescription prescription= prescriptionRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Prescription not found"));
+        prescription.setTimeToTake(updated.getTimeToTake());
+        prescription.setStartDate(updated.getStartDate());
+        prescription.setEndDate(updated.getEndDate());
+
+        prescriptionRepository.save(prescription);
+        return  prescription;
     }
 }

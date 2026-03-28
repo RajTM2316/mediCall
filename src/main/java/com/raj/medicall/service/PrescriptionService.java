@@ -1,6 +1,7 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PrescriptionRequest;
+import com.raj.medicall.dto.ReschedulePrescriptionRequest;
 import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Prescription;
 
@@ -15,4 +16,5 @@ public interface PrescriptionService {
     public List<Prescription> getByPatientId(Long patientId);
     public List<Prescription> getByDoctorId(Long doctorId);
     public Prescription updatePrescription(UpdatePrescription prescription,Long id);
+    public Prescription rescheduledPrescription(ReschedulePrescriptionRequest prescription, Long id);
 }
