@@ -69,6 +69,7 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         return prescriptionRepository.findByConsultation_Doctor_Id(doctorId);
     }
 
+    @Transactional
     @Override
     public Prescription updatePrescription(UpdatePrescription updated, Long id) {
         Medicine medicine = medicineRepository.findById(updated.getMedicineId())
@@ -89,6 +90,7 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         return prescription;
     }
 
+    @Transactional
     @Override
     public Prescription rescheduledPrescription(ReschedulePrescriptionRequest updated, Long id) {
         Prescription prescription= prescriptionRepository.findById(id)
@@ -101,6 +103,7 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         return  prescription;
     }
 
+    @Transactional
     @Override
     public String deletePrescription(Long id) {
         Prescription prescription= prescriptionRepository.findById(id)

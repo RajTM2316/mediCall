@@ -62,13 +62,11 @@ public class ConsultationServiceIMP implements ConsultationService {
     }
 
     @Override
-    @Transactional
-    public List<Consultation> getConsultationForPatient(Long id) {
+       public List<Consultation> getConsultationForPatient(Long id) {
         return consultationRepository.findByPatient_Id(id);
     }
 
     @Override
-    @Transactional
     public List<Consultation> getConsultationForDoctor(Long id) {
         return consultationRepository.findByDoctor_Id(id);
     }
