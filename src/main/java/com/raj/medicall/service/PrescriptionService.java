@@ -17,4 +17,5 @@ public interface PrescriptionService {
     public List<Prescription> getByDoctorId(Long doctorId);
     public Prescription updatePrescription(UpdatePrescription prescription,Long id);
     public Prescription rescheduledPrescription(ReschedulePrescriptionRequest prescription, Long id);
+    public String deletePrescription(Long id);
 }

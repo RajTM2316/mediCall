@@ -48,5 +48,9 @@ public class PrescriptionController {
     public ResponseEntity<Prescription> reschedulePrescription(@Valid @RequestBody ReschedulePrescriptionRequest updated, @PathVariable Long id){
         return ResponseEntity.ok(prescriptionService.rescheduledPrescription(updated,id));
     }
+    @DeleteMapping("/upd/remove/{id}")
+    public String deletePrescription(@PathVariable Long id){
+        return prescriptionService.deletePrescription(id);
+    }
 
 }

@@ -100,4 +100,12 @@ public class PrescriptionServiceIMP implements PrescriptionService{
         prescriptionRepository.save(prescription);
         return  prescription;
     }
+
+    @Override
+    public String deletePrescription(Long id) {
+        Prescription prescription= prescriptionRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Prescription not found"));
+        prescriptionRepository.delete(prescription);
+        return "Prescription Deleted Successfully";
+    }
 }
