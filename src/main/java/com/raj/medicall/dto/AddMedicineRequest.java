@@ -20,6 +20,6 @@ public class AddMedicineRequest {
 
     @NotBlank(message = "Medicine strength is required")
     private String strength;
-    @Lob
+
     private String description;
 }

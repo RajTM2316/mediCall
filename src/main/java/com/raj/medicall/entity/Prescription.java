@@ -1,5 +1,6 @@
 package com.raj.medicall.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class Prescription {
     @JoinColumn(name = "consultation_id",nullable = false)
     @Getter
     @Setter
+    @JsonIgnore
     private Consultation consultation;
 
     @Getter
@@ -48,7 +50,7 @@ public class Prescription {
     @Setter
     private LocalDate endDate;
 
-    @Lob
+
     @Getter
     @Setter
     private String notes;

@@ -18,18 +18,28 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
-    // 1. Get by ID
+
     @GetMapping("/{id}")
     public ResponseEntity<Prescription> getById(@PathVariable Long id) {
         return ResponseEntity.ok(prescriptionService.getById(id));
     }
 
-    // 2. Get all
+
     @GetMapping
     public ResponseEntity<List<Prescription>> getAll() {
         return ResponseEntity.ok(prescriptionService.getAll());
     }
 
-
-
+    @GetMapping("/consultation/{id}")
+        public ResponseEntity<List<Prescription>> getByConsultationId(@PathVariable Long id){
+        return ResponseEntity.ok(prescriptionService.getByConsultationId(id));
+        }
+    @GetMapping("/patient/{id}")
+    public List<Prescription> getByPatient(@PathVariable Long id) {
+        return prescriptionService.getByPatientId(id);
+    }
+    @GetMapping("/doctor/{id}")
+    public List<Prescription> getByDoctor(@PathVariable Long id) {
+        return prescriptionService.getByDoctorId(id);
+    }
 }

@@ -52,8 +52,18 @@ public class PrescriptionServiceIMP implements PrescriptionService{
     public List<Prescription> getAll() {
         return prescriptionRepository.findAll();
     }
+    @Override
+    public List<Prescription> getByConsultationId(Long consultationId) {
+        return prescriptionRepository.findByConsultation_ConsultationId(consultationId);
+    }
 
+    @Override
+    public List<Prescription> getByPatientId(Long patientId) {
+        return prescriptionRepository.findByConsultation_Patient_Id(patientId);
+    }
 
-
-
+    @Override
+    public List<Prescription> getByDoctorId(Long doctorId) {
+        return prescriptionRepository.findByConsultation_Doctor_Id(doctorId);
+    }
 }

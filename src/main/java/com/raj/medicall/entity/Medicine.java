@@ -40,7 +40,6 @@ public class Medicine {
 
     @Getter
     @Setter
-    @Lob
     private String description;
 
 
