@@ -1,6 +1,7 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PrescriptionRequest;
+import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Prescription;
 
 import java.security.PublicKey;
@@ -13,4 +14,5 @@ public interface PrescriptionService {
     public List<Prescription> getByConsultationId(Long consultationId);
     public List<Prescription> getByPatientId(Long patientId);
     public List<Prescription> getByDoctorId(Long doctorId);
+    public Prescription updatePrescription(UpdatePrescription prescription,Long id);
 }

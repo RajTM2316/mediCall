@@ -1,13 +1,12 @@
 package com.raj.medicall.controller;
 
+import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Prescription;
 import com.raj.medicall.service.PrescriptionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,12 +17,10 @@ public class PrescriptionController {
     @Autowired
     private PrescriptionService prescriptionService;
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Prescription> getById(@PathVariable Long id) {
         return ResponseEntity.ok(prescriptionService.getById(id));
     }
-
 
     @GetMapping
     public ResponseEntity<List<Prescription>> getAll() {
@@ -41,5 +38,9 @@ public class PrescriptionController {
     @GetMapping("/doctor/{id}")
     public List<Prescription> getByDoctor(@PathVariable Long id) {
         return prescriptionService.getByDoctorId(id);
+    }
+    @PutMapping("/upd/{id}")
+    public ResponseEntity<Prescription> updatePrescription(@Valid @RequestBody UpdatePrescription updated, @PathVariable Long id){
+        return ResponseEntity.ok(prescriptionService.updatePrescription(updated,id));
     }
 }

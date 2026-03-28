@@ -1,6 +1,7 @@
 package com.raj.medicall.service;
 
 import com.raj.medicall.dto.PrescriptionRequest;
+import com.raj.medicall.dto.UpdatePrescription;
 import com.raj.medicall.entity.Consultation;
 import com.raj.medicall.entity.Medicine;
 import com.raj.medicall.entity.Prescription;
@@ -65,5 +66,25 @@ public class PrescriptionServiceIMP implements PrescriptionService{
     @Override
     public List<Prescription> getByDoctorId(Long doctorId) {
         return prescriptionRepository.findByConsultation_Doctor_Id(doctorId);
+    }
+
+    @Override
+    public Prescription updatePrescription(UpdatePrescription updated, Long id) {
+        Medicine medicine = medicineRepository.findById(updated.getMedicineId())
+                .orElseThrow(()-> new ResourceNotFoundException("Medicine not found"));
+
+        Prescription prescription= prescriptionRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Prescription not found"));
+
+        prescription.setFrequency(updated.getFrequency());
+        prescription.setNotes(updated.getNotes());
+        prescription.setMedicine(medicine);
+        prescription.setStartDate(updated.getStartDate());
+        prescription.setEndDate(updated.getEndDate());
+        prescription.setDosage(updated.getDosage());
+        prescription.setTimeToTake(updated.getTimeToTake());
+
+        prescriptionRepository.save(prescription);
+        return prescription;
     }
 }
