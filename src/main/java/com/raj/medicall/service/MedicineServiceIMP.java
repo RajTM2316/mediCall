@@ -2,6 +2,7 @@ package com.raj.medicall.service;
 
 import com.raj.medicall.dto.AddMedicineRequest;
 import com.raj.medicall.entity.Medicine;
+import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.MedicineRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
+import java.util.List;
+
 @Service
 public class MedicineServiceIMP implements MedicineService{
 
@@ -26,5 +29,20 @@ public class MedicineServiceIMP implements MedicineService{
         medicine.setDescription(request.getDescription());
 
         return medicineRepository.save(medicine);
+    }
+
+    @Override
+    public List<Medicine> getAll() {
+        return medicineRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public String remove(Long id) {
+        Medicine medicine = medicineRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Medicine not found"));
+
+        medicineRepository.delete(medicine);
+        return "Medicine Removed From The Store";
     }
 }
