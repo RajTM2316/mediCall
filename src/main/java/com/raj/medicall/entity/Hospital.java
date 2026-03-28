@@ -19,7 +19,6 @@ public class Hospital {
     @Column(nullable = false)
     private String hospitalName;
 
-    @Lob
     @Getter
     @Setter
     @Column(columnDefinition = "TEXT")

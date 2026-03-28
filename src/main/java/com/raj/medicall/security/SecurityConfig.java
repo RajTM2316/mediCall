@@ -40,6 +40,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 // Public endpoints first
+                .requestMatchers(HttpMethod.GET, "/hospitals").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/patients").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/admins").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/doctors").permitAll()
