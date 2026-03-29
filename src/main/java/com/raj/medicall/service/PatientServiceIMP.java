@@ -55,7 +55,13 @@ public class PatientServiceIMP implements PatientService {
         response.put("message", "Patient Registered Successfully!!!");
         return response;
     }
-
+/*
+* When a user logs in using Basic Auth, Spring Security does:
+ Verifies username + password from DB
+ Creates an Authentication object (object representing the logged-in user)
+ Stores it in SecurityContextHolder (Global Container)
+ Makes it available everywhere in your app
+* */
     @Override
     @Transactional
     public Map<String, String> updateProfile(UpdatePatientProfile request) {
