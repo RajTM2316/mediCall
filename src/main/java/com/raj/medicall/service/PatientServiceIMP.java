@@ -10,6 +10,8 @@ import com.raj.medicall.repository.RoleRepository;
 import com.raj.medicall.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,13 +60,14 @@ public class PatientServiceIMP implements PatientService {
     @Transactional
     public Map<String, String> updateProfile(UpdatePatientProfile request) {
         Map<String,String> response = new HashMap<>();
-        Optional<Patient> optionalPatient = patientRepository.findById(request.getPatientId());
-        if (optionalPatient.isEmpty()) {
-            response.put("status", "error");
-            response.put("message", "Patient not found");
-            return response;
-        }
-        Patient patient = optionalPatient.get();
+        // Get logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        // Fetch patient using email
+        Patient patient = patientRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
+        //update patient
         patient.setAge(request.getAge());
         patient.setGender(request.getGender());
         patient.setEmergencyContact(request.getEmergencyContact());

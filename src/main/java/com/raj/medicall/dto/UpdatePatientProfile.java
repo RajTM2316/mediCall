@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class UpdatePatientProfile {
-    @NotNull(message = "Patient ID is required")
-    private Long patientId;
 
     @Min(value = 0, message = "Age cannot be negative")
     @Max(value = 120, message = "Age seems unrealistic")
