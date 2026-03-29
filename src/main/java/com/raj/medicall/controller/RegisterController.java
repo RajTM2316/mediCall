@@ -49,7 +49,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register/hospitals")
-    public Map<String,String> registerDoctor(@Valid @RequestBody HospitalRegisterRequest request){
+    public Map<String,String> registerHospital(@Valid @RequestBody HospitalRegisterRequest request){
         return hospitalService.registerHospital(request);
     }
 
