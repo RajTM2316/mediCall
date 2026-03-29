@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class UpdateDoctorProfile {
-    @NotNull(message = "Doctor ID is required")
-    private Long doctorId;
 
     @NotBlank(message = "Qualification is required")
     @Size(max = 100, message = "Qualification must be under 100 characters")

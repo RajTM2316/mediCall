@@ -5,15 +5,19 @@ import com.raj.medicall.dto.UserRegisterRequest;
 import com.raj.medicall.entity.Doctor;
 import com.raj.medicall.entity.Hospital;
 import com.raj.medicall.entity.Role;
+import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.DoctorRepository;
 import com.raj.medicall.repository.HospitalRepository;
 import com.raj.medicall.repository.RoleRepository;
 import com.raj.medicall.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -60,13 +64,15 @@ public class DoctorServiceIMP implements DoctorService{
     @Transactional
     public Map<String, String> updateDoctorProfile(UpdateDoctorProfile request) {
         Map<String,String> response=new HashMap<>();
-        Optional<Doctor> optionalDoctor = doctorRepository.findById(request.getDoctorId());
-        if (optionalDoctor.isEmpty()) {
-            response.put("status", "error");
-            response.put("message", "Doctor not found");
-            return response;
-        }
-        Doctor doctor = optionalDoctor.get();
+
+        // Get logged-in doctor
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        // Fetch doctor using email
+        Doctor doctor = doctorRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found"));
+
         doctor.setQualification(request.getQualification());
         doctor.setSpecialization(request.getSpecialization());
         doctor.setExpYears(request.getExpYears());
