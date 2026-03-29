@@ -43,10 +43,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/hospitals").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/patients").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register/admins").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/register/doctors").permitAll()
                 .requestMatchers(HttpMethod.POST, "/consult").permitAll()
                 .requestMatchers(HttpMethod.GET, "/test/auth").permitAll()
                 // Role-based endpoints
+                .requestMatchers(HttpMethod.POST, "/auth/register/doctors").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/auth/register/hospitals").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/auth/register/medicines").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/test/patient").hasRole("PATIENT")
