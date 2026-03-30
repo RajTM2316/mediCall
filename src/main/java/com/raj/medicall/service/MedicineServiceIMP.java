@@ -4,6 +4,7 @@ import com.raj.medicall.dto.AddMedicineRequest;
 import com.raj.medicall.entity.Medicine;
 import com.raj.medicall.exception.ResourceNotFoundException;
 import com.raj.medicall.repository.MedicineRepository;
+import com.raj.medicall.repository.PrescriptionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class MedicineServiceIMP implements MedicineService{
 
     @Autowired
     private MedicineRepository medicineRepository;
+
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
 
     @Override
     @Transactional
@@ -42,6 +46,10 @@ public class MedicineServiceIMP implements MedicineService{
         Medicine medicine = medicineRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Medicine not found"));
 
+        // 1. Delete all prescriptions using this medicine
+        prescriptionRepository.deleteByMedicine(medicine);
+
+        // 2. Now delete medicine
         medicineRepository.delete(medicine);
         return "Medicine Removed From The Store";
     }
