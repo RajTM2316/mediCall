@@ -80,6 +80,7 @@ public class PatientServiceIMP implements PatientService {
         patient.setBloodGroup(request.getBloodGroup());
         patient.setHeight(request.getHeight());
         patient.setWeight(request.getWeight());
+        patient.setAllergies(request.getAllergies());
         patientRepository.save(patient);
         response.put("status", "success");
         response.put("message", "Profile updated successfully");

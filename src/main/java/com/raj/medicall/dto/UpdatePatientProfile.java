@@ -3,6 +3,8 @@ package com.raj.medicall.dto;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UpdatePatientProfile {
 
@@ -35,4 +37,6 @@ public class UpdatePatientProfile {
             message = "Emergency contact must be a valid 10-digit number"
     )
     private String emergencyContact;
+
+    private List<String> allergies;
 }
