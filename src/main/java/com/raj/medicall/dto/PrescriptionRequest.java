@@ -29,6 +29,12 @@ public class PrescriptionRequest {
     private LocalDate endDate;
     @Size(max = 300, message = "Notes must be under 300 characters")
     private String notes;
+
+    /*
+It is a Bean Validation annotation from jakarta.validation. It tells Spring:
+"Run this method when validating — if it returns false,
+throw a validation error with this message."
+*/
     @AssertTrue(message = "End date must be after or equal to start date")
     public boolean isValidDateRange() {
         if (startDate == null || endDate == null) return true;

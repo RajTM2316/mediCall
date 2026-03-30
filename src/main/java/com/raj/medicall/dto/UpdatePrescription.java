@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class UpdatePrescription {
     @NotNull(message = "Medicine ID is required")
     private Long medicineId;
-    @NotNull(message = "Medicine ID is required")
+    @NotNull(message = "Prescription ID is required")
     private Long prescriptionId;
     @NotBlank(message = "Dosage is required")
     @Size(max = 100, message = "Dosage must be under 100 characters")
